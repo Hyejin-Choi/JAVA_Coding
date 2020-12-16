@@ -1,0 +1,63 @@
+class Sort{
+	int max1=0;
+	int max2=0;
+	public void max1(int max) {
+		max1=max;
+	}
+    public void max2(int max) {
+		max2=max;
+	}
+    public int result() {
+    	if(max1>max2)
+    		return max1;
+    	else
+    		return max2;
+    }
+}
+class Test{
+	
+	
+	public static void main(String arg[]) throws InterruptedException {
+		Sort maxi = new Sort();
+		Runnable task1 =() ->{		
+			int[] arr1= new int[50];
+			arr1[1]=(int)(100*Math.random());
+			int max = arr1[1];
+			for(int i=1;i<=49; i++) {
+    		arr1[i]=(int)(100*Math.random());	
+    				if(max < arr1[i])
+    					max = arr1[i];
+			}
+			
+			maxi.max1(max);
+			
+			
+		};
+		Runnable task2 =() ->{
+			int[] arr2= new int[50];
+			arr2[1]=(int)(100*Math.random());
+			int max = arr2[1];
+			for(int i=1;i<=49; i++) {
+				arr2[i]=(int)(100*Math.random());
+				if(max < arr2[i])
+					max = arr2[i];
+			}
+			maxi.max2(max);
+		};		
+			
+		Thread t1 = new Thread(task1);
+		Thread t2 = new Thread(task2);
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println(maxi.result());
+			
+		
+		
+		
+		
+	}
+	
+	
+}
