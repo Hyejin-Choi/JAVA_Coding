@@ -22,7 +22,9 @@ JAVA언어를 이용해 1학기 동안 만든 프로그램입니다.
 ![군인관리](https://user-images.githubusercontent.com/45071833/102353332-3e00be80-3fec-11eb-9735-c4d29401860b.JPG)
 ![군인관리2](https://user-images.githubusercontent.com/45071833/102353341-3f31eb80-3fec-11eb-9cdd-650f6535407d.JPG)
 
-**(1. 아이디와 비밀번호 설정)**                                          **(2. 군인의 직업과 이름, 입대날짜를 설정)**
+**(1. 아이디와 비밀번호 설정)** 
+
+**(2. 군인의 직업과 이름, 입대날짜를 설정)**
 
 ![군인관리3](https://user-images.githubusercontent.com/45071833/102353345-40fbaf00-3fec-11eb-8fb3-98d9697b2bf7.JPG)
 
