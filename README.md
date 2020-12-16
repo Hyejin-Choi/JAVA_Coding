@@ -20,6 +20,8 @@ JAVA언어를 이용해 1학기 동안 만든 프로그램입니다.
 5. 파일에 덮어씌우거나 재검색 또는 끝내기 기능
 
 
+
+
 ![군인관리](https://user-images.githubusercontent.com/45071833/102353332-3e00be80-3fec-11eb-9735-c4d29401860b.JPG)
 
 ![군인관리2](https://user-images.githubusercontent.com/45071833/102353341-3f31eb80-3fec-11eb-9cdd-650f6535407d.JPG)
