@@ -1,0 +1,666 @@
+package 최종본;
+import java.util.*;
+
+import javax.swing.JFrame;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+
+
+
+class Soldier2 implements Serializable {
+   String name,work;
+   public int year,month,day;
+   int y2,m2,d2,d3;
+   int m1,m3;
+   public int serviceterm;
+   String AAA;
+   
+   public void Imformation() {
+      Scanner scan=new Scanner(System.in);
+         System.out.println("오늘의 날짜를 입력해 주세요!");
+         System.out.print("년:");
+         year=scan.nextInt();
+         System.out.print("월:");
+         month=scan.nextInt();
+         System.out.print("일:");
+         day=scan.nextInt();
+         System.out.println("오늘의 날짜는"+year+"년"+month+"월"+day+"일 입니다.");
+         System.out.println("");
+   }
+   
+   public void Person() {
+      Scanner scan=new Scanner(System.in);
+         System.out.print("**군인 이름:");
+         name=scan.next();
+         System.out.println("**입대 날짜");
+         System.out.print("년:");
+         y2=scan.nextInt();
+         System.out.print("월:");
+         m2=scan.nextInt();
+         System.out.print("일:");
+         d2=scan.nextInt();
+         System.out.println("입대 날짜는"+y2+"년"+m2+"월"+d2+"일 입니다.");
+          System.out.println(" ");
+   
+      AAA = y2+"년"+m2+"월"+d2+"일";
+   }
+   
+public void MembersName() {
+   
+   }
+public void MembersInput() {
+   
+}
+   
+   public int ServiceTerm() {
+      int allday=0,allday2=0;
+      for(int i=1;i<month;i++) {
+            switch(i){
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+             m1=m1+31;}
+            switch(i) {
+             case 4: case 6: case 9: case 11:
+             m1=m1+30;}
+            switch(i) {
+            case 2:
+             if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+              m1=m1+29;
+             else
+              m1=m1+28;
+           }
+           allday=m1+day;
+           }
+      
+        for(int k=1;k<m2;k++) {
+            switch(k){
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+             m3=m3+31;}
+            switch(k) {
+             case 4: case 6: case 9: case 11:
+             m3=m3+30;}
+            switch(k) {
+            case 2:
+             if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+              m3=m3+29;
+             else
+              m3=m3+28;}
+            allday2=m3+d2;
+         }
+        
+      if(year==y2) {
+         serviceterm=allday-allday2; 
+       }
+      else if((y2+1) == year) {
+          serviceterm=(allday-allday2)+365;
+       }
+       
+       else if((y2+2) == year) {
+           serviceterm=(allday-allday2)+(365*2);
+        }
+
+      System.out.println("군 복무 기간은"+serviceterm+"일 입니다");
+      return serviceterm;
+      
+   }
+   
+   public void serviceTerm() {
+      //System.out.println("군 복무 기간 : "+serviceterm);
+   }
+   
+   public void Remainders() {}
+   public void RemainderDate() {
+      switch(m2){
+         case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+          d3=31;}
+         switch(m2) {
+          case 4: case 6: case 9: case 11:
+          d3=30;}
+         switch(m2) {
+         case 2:
+          if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+           d3=29;
+          else
+           d3=28;}
+       }
+   public void rankmoney() {}
+   
+}
+   
+class Army extends Soldier2 implements Serializable {
+   
+   int remainder;
+   double perremainder;
+   
+    public void Remainders() {
+          int all=0;
+          switch(m2) {
+          case 1: case 2:
+             all=637;
+             break;
+          case 6: case 8: case 9: case 10: case 11:
+             all=638;
+             break;
+          case 3: case 4: case 7: case 12:
+             all=639;
+             break;
+          case 5:
+             all=640;
+             break;
+          }
+          remainder=all-serviceterm;
+          perremainder=((double)serviceterm/all)*100;
+          System.out.println("남은 군복무 기간은"+remainder+"("+perremainder+"%)일 입니다.");
+       }
+    
+    public void RemainderDate() {
+       if(d2==1) {
+          
+          if(m2>4) {
+             switch(m2-4){
+               case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                d3=31;}
+               switch(m2-4) {
+                case 4: case 6: case 9: case 11:
+                d3=30;}
+               switch(m2-4) {
+               case 2:
+                if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+                 d3=29;
+                else
+                 d3=28;}
+             System.out.println("전역일은"+(y2+2)+"년"+(m2-4)+"월"+d3+"일 입니다.");}
+          if(m2<=4) {
+             switch(m2+8){
+               case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                d3=31;}
+               switch(m2+8) {
+                case 4: case 6: case 9: case 11:
+                d3=30;}
+               switch(m2+8) {
+               case 2:
+                if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+                 d3=29;
+                else
+                 d3=28;}
+             System.out.println("전역일은"+(y2+1)+"년"+(m2+8)+"월"+d3+"일 입니다.");}
+       }
+       else   { 
+         if(m2>=4)
+               System.out.println("전역일은"+(y2+2)+"년"+(m2-3)+"월"+(d2-1)+"일 입니다.");
+         if(m2<4)
+               System.out.println("전역일은"+(y2+1)+"년"+(m2+9)+"월"+(d2-1)+"일 입니다.");   
+      }}
+    public void rankmoney() {
+       int alldate = 0;
+         switch(m2) {
+         case 1: case 2:
+            alldate=637;
+            break;
+         case 6: case 8: case 9: case 10: case 11:
+            alldate=638;
+            break;
+         case 3: case 4: case 7: case 12:
+            alldate=639;
+            break;
+         case 5:
+            alldate=640;
+            break;
+         }
+       if((0<serviceterm)&&(serviceterm<=92))
+        {
+           System.out.println("지금의 계급은 이등병이네요!");
+           System.out.println("현재 월급은 306,100원 입니다.");
+           System.out.println("일병까지 남은 기간은 "+(93-serviceterm)+"일 남았네요.");
+           
+        }
+        else if((92<serviceterm)&&(serviceterm<=307)) 
+        {
+           System.out.println("지금의 계급은 일병이네요!");
+           System.out.println("현재 월급은 331,300원 입니다.");
+           System.out.println("상병까지 남은 기간은 "+(308-serviceterm)+"일 남았네요.");
+           
+        }
+        else if((307<serviceterm)&&(serviceterm<=522)) 
+        {
+           System.out.println("지금의 계급은 상병이네요!");
+           System.out.println("현재 월급은 366,200원 입니다.");
+           System.out.println("병장까지 남은 기간은 "+(523-serviceterm)+"일 남았네요.");
+           
+        }
+        else if((522<serviceterm)&&(serviceterm<=alldate)) 
+        {
+           System.out.println("지금의 계급은 병장이네요!");
+           System.out.println("현재 월급은 405,700원 입니다.");
+           System.out.println("제대까지 남은 기간은 "+(alldate-serviceterm)+"일 남았네요.");
+           
+        }
+       
+       
+      
+       
+       
+    }
+    
+    public void MembersName() {
+      
+       System.out.println("이름 : "+name);
+            
+      }
+   public void MembersInput() {
+      
+      System.out.println("입대일 : "+AAA);
+      
+   }
+   
+   public void serviceTerm() {
+         System.out.println("군 복무 기간 : "+serviceterm+"일");
+       System.out.println("남은 군복무 기간 : "+remainder+"("+perremainder+"%)"+"일");
+      }
+    
+    
+}
+
+class Marine extends Soldier2 implements Serializable {
+   
+   int remainder;
+   double perremainder;
+   
+    public void Remainders() {
+       
+          
+          int all=0;
+          
+          switch(m2) {
+          case 1: case 2:
+             all=698;
+             break;
+          case 4: case 6: case 8: case 9: case 11: case 12:
+             all=699;
+             break;
+          case 5: case 7: case 10:
+             all=700;
+             break;
+          case 3:
+             all=701;
+             break;
+          }
+          remainder=all-serviceterm;
+          perremainder=((double)serviceterm/all)*100;
+          System.out.println("남은 군복무 기간은"+remainder+"("+perremainder+"%)일 입니다.");
+       }
+    
+    public void RemainderDate() {
+       if(d2==1) {
+          if(m2<=2) {
+             switch(m2+10){
+               case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                d3=31;}
+               switch(m2+10) {
+                case 4: case 6: case 9: case 11:
+                d3=30;}
+               switch(m2+10) {
+               case 2:
+                if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+                 d3=29;
+                else
+                 d3=28;}
+             System.out.println("전역일은"+(y2+1)+"년"+(m2+10)+"월"+d3+"일 입니다.");}
+          if(m2>2) {
+             switch(m2-2){
+               case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                d3=31;}
+               switch(m2-2) {
+                case 4: case 6: case 9: case 11:
+                d3=30;}
+               switch(m2-2) {
+               case 2:
+                if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+                 d3=29;
+                else
+                 d3=28;}
+             System.out.println("전역일은"+(y2+2)+"년"+(m2-2)+"월"+d3+"일 입니다.");}
+       }
+       else
+          if(m2==1)
+               System.out.println("전역일은"+(y2+1)+"년"+12+"월"+(d2-1)+"일 입니다.");
+          else
+               System.out.println("전역일은"+(y2+2)+"년"+(m2-1)+"월"+(d2-1)+"일 입니다.");   
+      }
+      public void rankmoney() {
+         int alldate = 0;
+            
+            switch(m2) {
+            case 1: case 2:
+               alldate=698;
+               break;
+            case 4: case 6: case 8: case 9: case 11: case 12:
+               alldate=699;
+               break;
+            case 5: case 7: case 10:
+               alldate=700;
+               break;
+            case 3:
+               alldate=701;
+               break;
+            }
+         if((0<serviceterm)&&(serviceterm<=183))
+          {
+             System.out.println("지금의 계급은 이등병이네요!");
+             System.out.println("현재 월급은 306,100원 입니다.");
+             System.out.println("일병까지 남은 기간은 "+(184-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((183<serviceterm)&&(serviceterm<=368)) 
+          {
+             System.out.println("지금의 계급은 일병이네요!");
+             System.out.println("현재 월급은 331,300원 입니다.");
+             System.out.println("상병까지 남은 기간은 "+(369-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((368<serviceterm)&&(serviceterm<=528)) 
+          {
+             System.out.println("지금의 계급은 상병이네요!");
+             System.out.println("현재 월급은 366,200원 입니다.");
+             System.out.println("병장까지 남은 기간은 "+(529-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((528<serviceterm)&&(serviceterm<=alldate)) 
+          {
+             System.out.println("지금의 계급은 병장이네요!");
+             System.out.println("현재 월급은 405,700원 입니다.");
+             System.out.println("제대까지 남은 기간은 "+(alldate-serviceterm)+"일 남았네요.");
+             
+          }
+      }
+      
+      public void MembersName() {
+        
+         System.out.println("이름 : "+name);
+              
+        }
+     public void MembersInput() {
+        
+        System.out.println("입대일 : "+AAA);
+        
+     }
+     
+     public void serviceTerm() {
+           System.out.println("군 복무 기간 : "+serviceterm+"일");
+         System.out.println("남은 군복무 기간 : "+remainder+"("+perremainder+"%)"+"일");
+        }  
+    
+   
+}
+class Airforce extends Soldier2 implements Serializable {
+   
+   int remainder;
+   double perremainder;
+   
+    public void Remainders() {
+   
+          int all=0;
+          
+          switch(m2) {
+          case 1: case 2:
+             all=729;
+             break;
+          case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 12:
+             all=730;
+             break;
+          }
+          remainder=all-serviceterm;
+          perremainder=((double)serviceterm/all)*100;
+          System.out.println("남은 군복무 기간은"+remainder+"("+perremainder+"%)일 입니다.");
+       }
+    
+    public void RemainderDate() {
+       if(d2==1) {
+          if(m2==1)
+             System.out.println("전역일은"+(year+1)+"년"+12+"월"+31+"일 입니다.");
+          else {
+             switch(m2-1){
+               case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                d3=31;}
+               switch(m2-1) {
+                case 4: case 6: case 9: case 11:
+                d3=30;}
+               switch(m2-1) {
+               case 2:
+                if( ( (year%4==0)&&(year%100!=0) )||(year%400==0) ) //2월 윤년 공식
+                 d3=29;
+                else
+                 d3=28;}
+             System.out.println("전역일은"+(year+2)+"년"+(m2-1)+"월"+d3+"일 입니다.");
+          }
+       }
+       else
+          System.out.println("전역일은"+(y2+2)+"년"+m2+"월"+(d2-1)+"일 입니다.");
+         
+      }
+      public void rankmoney() {
+          int alldate=0;
+          switch(m2) {
+          case 1: case 2:
+             alldate=729;
+             break;
+          case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 12:
+             alldate=730;
+             break;
+          }
+         if((0<serviceterm)&&(serviceterm<=92))
+          {
+             System.out.println("지금의 계급은 이등병이네요!");
+             System.out.println("현재 월급은 306,100원 입니다.");
+             System.out.println("일병까지 남은 기간은 "+(184-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((92<serviceterm)&&(serviceterm<=307)) 
+          {
+             System.out.println("지금의 계급은 일병이네요!");
+             System.out.println("현재 월급은 331,300원 입니다.");
+             System.out.println("상병까지 남은 기간은 "+(369-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((307<serviceterm)&&(serviceterm<=522)) 
+          {
+             System.out.println("지금의 계급은 상병이네요!");
+             System.out.println("현재 월급은 366,200원 입니다.");
+             System.out.println("병장까지 남은 기간은 "+(529-serviceterm)+"일 남았네요.");
+             
+          }
+          else if((528<serviceterm)&&(serviceterm<=alldate)) 
+          {
+             System.out.println("지금의 계급은 병장이네요!");
+             System.out.println("현재 월급은 405,700원 입니다.");
+             System.out.println("제대까지 남은 기간은 "+(alldate-serviceterm)+"일 남았네요.");
+             
+          }
+      }
+      
+      public void MembersName() {
+        
+         System.out.println("이름 : "+name);
+              
+        }
+     public void MembersInput() {
+        
+        System.out.println("입대일 : "+AAA);
+        
+     }
+     
+     public void serviceTerm() {
+           System.out.println("군 복무 기간 : "+serviceterm+"일");
+         System.out.println("남은 군복무 기간 : "+remainder+"("+perremainder+"%)"+"일");
+        }
+      
+}
+
+
+
+public class SoldierTest {
+    static String id = ""; 
+     static int pass = 0; 
+   public static void main(String args[])throws IOException, ClassNotFoundException {
+     
+      int st=0; String s;
+       String work;
+       Soldier2[] person = new Soldier2[3]; 
+     
+      person[0] = new Army();
+      person[1] = new Marine();
+      person[2] = new Airforce();
+ 
+    //관리자 프로그램
+      List<HashMap> list = new ArrayList<HashMap>();        
+      HashMap hm;         
+      hm = new HashMap();         
+      hm.put("id", "대한");         
+      hm.put("pass", "123"); 
+      hm.put("name", "상사"); 
+      list.add(hm); 
+      hm = new HashMap(); 
+      hm.put("id", "민국");   
+      hm.put("pass", "1234"); 
+      hm.put("name", "중사"); 
+      list.add(hm); 
+      
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("오늘도 수고하십니다.아이디와 패스워드를 입력해주세요. 충성!"); 
+      System.out.print("아이디 :"); 
+      id = scanner.next(); 
+      System.out.print("패스워드:"); 
+      pass = scanner.nextInt(); 
+      boolean id_chk = false; 
+      String hm_id = ""; 
+      int hm_pw = 0; 
+      String hm_nm = ""; 
+      
+      for(int i=0; i<list.size(); i++) {        
+         HashMap out = list.get(i);        
+         hm_id = (String) out.get("id"); 
+         if(hm_id.equals(id)) {  
+             id_chk = true; 
+             hm_pw = Integer.parseInt((String) out.get("pass"));
+             hm_nm = (String) out.get("name"); 
+          }
+      } 
+      if (!id_chk) { 
+         System.out.println("회원정보가 존재하지 않습니다");
+      } else if (pass != hm_pw) { 
+         System.out.println("비밀번호 불일치"); 
+      } else { 
+         System.out.println("["+ hm_nm + "]님 로그인되었습니다."); 
+      }
+        System.out.println("");
+
+
+       System.out.println("<알고싶은 군인의 정보를 입력해 주세요(군인직업,이름,입대날짜)>"); 
+   
+       Scanner scan=new Scanner(System.in);
+        System.out.print("**군인의 직업:(육군,해군,공군)");
+        work=scan.next();
+        
+      if(work.equals("육군")) {
+         
+         person[0].Person();
+         person[0].Imformation();
+         person[0].MembersName();
+         person[0].MembersInput();
+         person[0].ServiceTerm();
+         person[0].Remainders();
+         person[0].RemainderDate();
+         person[0].rankmoney();
+      }
+      if(work.equals("해군")) {
+         person[1].Person();
+         person[1].Imformation();
+         person[1].MembersName();
+         person[1].MembersInput();
+         person[1].ServiceTerm();
+         person[1].Remainders();
+         person[1].RemainderDate();
+         person[1].rankmoney();
+      }
+      
+      if(work.equals("공군")) {
+         person[2].Person();
+         person[2].Imformation();
+         person[2].MembersName();
+         person[2].MembersInput();
+         person[2].ServiceTerm();
+         person[2].Remainders();
+         person[2].RemainderDate();
+         person[2].rankmoney();
+      }
+   
+      ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("SaveSoldier.txt")); 
+      
+      //java.io.NotSerializableException -> 직렬화 오류 발생 -> Employee 클래스에 implements 해야한다.
+      oos.writeObject(person[0]);
+      oos.writeObject(person[1]);
+      oos.writeObject(person[2]);
+  
+      oos.close();
+      
+      System.out.println("\n\n-----SaveSoldier.txt 파일에 객체 쓰기 완료-----\n");
+      
+     
+      
+      System.out.println("파일 저장목록을 불러오시겠습니까?(y/n)");
+      Scanner input_=new Scanner(System.in);
+      String YORN = input_.nextLine();
+      
+      if(YORN.equals("y")) {
+      
+      System.out.println("\n\n-----SaveSoldier.txt 파일 저장목록-----\n");
+      
+      
+      ObjectInputStream ois = new ObjectInputStream(new FileInputStream("SaveSoldier.txt"));
+      
+      //readObject()은 반환형이 Object
+      Object o1 = ois.readObject();
+      
+      
+    //형변환
+    Soldier2 NewPerson1 = (Army)o1;
+    Soldier2 NewPerson2 = (Marine)ois.readObject();
+    Soldier2 NewPerson3 = (Airforce)ois.readObject();
+    
+     
+      
+      if(work.equals("해병대")) {
+         NewPerson2.MembersName();
+          NewPerson2.MembersInput();
+         NewPerson2.serviceTerm();
+         NewPerson2.RemainderDate();
+         NewPerson2.rankmoney();
+       }
+       if(work.equals("육군")) {
+          NewPerson1.MembersName();
+          NewPerson1.MembersInput();
+          NewPerson1.serviceTerm();
+          NewPerson1.RemainderDate();
+         
+       }
+       
+       if(work.equals("공군")) {
+          NewPerson3.MembersName();
+          NewPerson3.MembersInput();
+          NewPerson3.serviceTerm();
+          NewPerson3.RemainderDate();
+        
+       }
+      
+      
+      ois.close();
+      
+      
+      } }}
